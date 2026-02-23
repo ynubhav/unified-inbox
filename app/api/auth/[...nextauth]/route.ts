@@ -19,7 +19,9 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "database",
   },
-
+   pages: {
+    signIn: "/login",
+  },
   callbacks: {
     async session({ session, user }) {
       // Ensure session.user.id exists
