@@ -1,7 +1,17 @@
+import Navbar from "@/components/Navbar";
+import Hero from "@/components//Landing/Hero";
+import Features from "@/components/Landing/Features";
+import CTA from "@/components/Landing/CTA";
+import Footer from "@/components/Footer";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-black text-white">
-      <h1 className="text-4xl font-bold">Unified Inbox</h1>
+    <main className="min-h-screen bg-gray-950 text-white">
+      <Navbar />
+      <Hero />
+      <Features />
+      <CTA />
+      <Footer />
     </main>
   );
 }
