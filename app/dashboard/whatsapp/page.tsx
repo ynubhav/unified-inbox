@@ -60,7 +60,9 @@ export default function WhatsAppPage() {
         body: JSON.stringify({
           platform: "whatsapp",
           phone,
-          message: `${generatedData.headline}\n\n${generatedData.message}\n\n${generatedData.cta}`,
+          headline: generatedData.headline,
+          body:generatedData.message,
+          cta: generatedData.cta,
         }),
       });
 

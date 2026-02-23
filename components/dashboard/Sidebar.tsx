@@ -20,11 +20,17 @@ export default function Sidebar({ user }: { user: string }) {
         <h2 className="text-xl font-semibold mb-8">Unified Inbox</h2>
 
         <nav className="space-y-3">
+          <Link href="/dashboard" className={linkStyle("/dashboard")}>
+            Home
+          </Link>
           <Link href="/dashboard/whatsapp" className={linkStyle("/dashboard/whatsapp")}>
             WhatsApp
           </Link>
           <Link href="/dashboard/sms" className={linkStyle("/dashboard/sms")}>
             SMS
+          </Link>
+          <Link href="/dashboard/history" className={linkStyle("/dashboard/history")}>
+            History
           </Link>
         </nav>
       </div>
