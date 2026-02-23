@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "@google/genai": "^1.42.0",
+    "@prisma/adapter-neon": "^7.4.1",
+    "@prisma/client": "^7.4.1",
     "axios": "^1.13.5",
+    "dotenv": "^17.3.1",
     "next": "16.1.6",
     "next-auth": "^4.24.13",
     "react": "19.2.3",
@@ -26,6 +29,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "prisma": "^7.4.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
