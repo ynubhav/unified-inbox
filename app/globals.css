@@ -33,3 +33,11 @@ input::-webkit-inner-spin-button {
   background-size: 1000px 100%;
   animation: shimmer 1.4s infinite linear;
 }
+
+/* Remove default select arrow */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none;
+}

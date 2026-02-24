@@ -46,7 +46,7 @@ export default function HistoryPage() {
         <select
           value={platformFilter}
           onChange={(e) => setPlatformFilter(e.target.value)}
-          className="bg-slate-800 border border-slate-700 rounded-lg p-3 text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="bg-slate-800 border border-slate-700 rounded-lg p-3 text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:cursor-pointer"
         >
           <option value="ALL">All Platforms</option>
           <option value="WHATSAPP">WhatsApp</option>

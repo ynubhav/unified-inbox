@@ -12,8 +12,9 @@ type GeneratedData = {
 
 export default function WhatsAppPage() {
   const [context, setContext] = useState("");
-  const [generatedData, setGeneratedData] =
-    useState<GeneratedData | null>(null);
+  const [generatedData, setGeneratedData] = useState<GeneratedData | null>(
+    null,
+  );
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
@@ -29,13 +30,16 @@ export default function WhatsAppPage() {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ context:context+".Generate for WhatsApp message." }),
+        body: JSON.stringify({
+          context: context + ".Generate for WhatsApp message.",
+        }),
       });
 
       const result = await res.json();
 
       if (!res.ok) {
         setStatus(result.error || "Failed to generate");
+        toast.error(result.error || "Failed to generate message");
         return;
       }
 
@@ -92,10 +96,8 @@ export default function WhatsAppPage() {
       <h1 className="text-3xl font-bold mb-8">WhatsApp Inbox</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
         {/* LEFT — MESSAGE PREVIEW / EDIT */}
         <div className="bg-slate-900 border border-slate-800 rounded-xl md:p-6 p-3 space-y-2">
-
           <h2 className="text-lg font-semibold text-slate-300">
             Message Preview
           </h2>
@@ -185,10 +187,7 @@ export default function WhatsAppPage() {
 
         {/* RIGHT — AI PROMPTING */}
         <div className="bg-slate-900 h-min border border-slate-800 rounded-xl md:p-6 p-3 space-y-6">
-
-          <h2 className="text-lg font-semibold text-slate-300">
-            AI Prompt
-          </h2>
+          <h2 className="text-lg font-semibold text-slate-300">AI Prompt</h2>
 
           <textarea
             value={context}
@@ -201,19 +200,35 @@ export default function WhatsAppPage() {
           <button
             onClick={handleGenerate}
             disabled={loading}
-            className="w-full bg-indigo-500 hover:bg-indigo-600 transition px-6 py-3 rounded-lg font-medium"
+            className="
+    w-full relative overflow-hidden
+    bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-500
+    hover:cursor-pointer
+    hover:from-indigo-400 hover:via-indigo-500 hover:to-indigo-400
+    transition-all duration-300
+    py-3 rounded-lg font-medium
+    shadow-lg shadow-indigo-500/20
+    hover:shadow-indigo-500/40
+    hover:-translate-y-px
+    active:translate-y-0
+    disabled:opacity-60 disabled:cursor-not-allowed
+  "
           >
-            {loading ? (
-              <span className="flex items-center justify-center">
-                <Loader2 className="animate-spin size-4 mr-2" />
-                Generating...
-              </span>
-            ) : (
-              "Generate Message"
-            )}
+            <span className="relative z-10 flex items-center justify-center">
+              {loading ? (
+                <>
+                  <Loader2 className="animate-spin size-4 mr-2" />
+                  Generating...
+                </>
+              ) : (
+                <>✨ Generate Message</>
+              )}
+            </span>
+
+            {/* subtle shine effect */}
+            <span className="absolute inset-0 bg-white/5 opacity-0 hover:opacity-100 transition duration-300" />
           </button>
         </div>
-
       </div>
     </div>
   );

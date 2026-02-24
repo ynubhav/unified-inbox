@@ -1,5 +1,6 @@
 "use client";
 
+import { Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 
@@ -40,11 +41,11 @@ export default function SignInPage() {
         <button
           onClick={handleGoogleSignIn}
           disabled={loading}
-          className="w-full flex items-center justify-center gap-3 bg-white text-black py-3 rounded-lg font-medium hover:opacity-90 transition"
+          className="w-full flex items-center justify-center gap-3 bg-white text-black py-3 rounded-lg font-medium hover:opacity-90 transition hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
             <IconGoogle />
             
-          {loading ? "Redirecting..." : "Continue with Google"}
+          {loading ? <span className="flex items-center gap-2">Redirecting<Loader2 className="animate-spin duration -3000 size-4"/></span> : "Continue with Google"}
         </button>
 
         {/* Divider */}
