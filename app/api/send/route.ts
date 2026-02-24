@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { sendWhatsApp, sendSMS } from "@/lib/twilio";
-import { prisma } from "@/lib/db";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
   try {
