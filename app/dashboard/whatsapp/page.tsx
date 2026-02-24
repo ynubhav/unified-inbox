@@ -1,6 +1,8 @@
 "use client";
 
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 type GeneratedData = {
   headline: string;
@@ -10,7 +12,8 @@ type GeneratedData = {
 
 export default function WhatsAppPage() {
   const [context, setContext] = useState("");
-  const [generatedData, setGeneratedData] = useState<GeneratedData | null>(null);
+  const [generatedData, setGeneratedData] =
+    useState<GeneratedData | null>(null);
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
@@ -20,14 +23,13 @@ export default function WhatsAppPage() {
     if (!context.trim()) return;
 
     setLoading(true);
-    setGeneratedData(null);
     setStatus(null);
 
     try {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ context }),
+        body: JSON.stringify({ context:context+".Generate for WhatsApp message." }),
       });
 
       const result = await res.json();
@@ -53,6 +55,7 @@ export default function WhatsAppPage() {
     setSending(true);
     setStatus(null);
 
+    const idtoast = toast.loading("Sending message...");
     try {
       const res = await fetch("/api/send", {
         method: "POST",
@@ -61,7 +64,7 @@ export default function WhatsAppPage() {
           platform: "whatsapp",
           phone,
           headline: generatedData.headline,
-          body:generatedData.message,
+          body: generatedData.message,
           cta: generatedData.cta,
         }),
       });
@@ -69,10 +72,12 @@ export default function WhatsAppPage() {
       const result = await res.json();
 
       if (!res.ok) {
+        toast.error(result.error || "Failed to send message", { id: idtoast });
         setStatus(result.error || "Failed to send");
         return;
       }
 
+      toast.success("Message sent successfully", { id: idtoast });
       setStatus("Message sent successfully 🎉");
     } catch (error) {
       console.error(error);
@@ -83,60 +88,133 @@ export default function WhatsAppPage() {
   };
 
   return (
-    <div className="max-w-3xl">
-      <h1 className="text-3xl font-bold mb-6">WhatsApp Inbox</h1>
+    <div className="max-w-7xl ">
+      <h1 className="text-3xl font-bold mb-8">WhatsApp Inbox</h1>
 
-      <textarea
-        value={context}
-        onChange={(e) => setContext(e.target.value)}
-        placeholder="Describe your offer, audience, tone..."
-        className="w-full bg-slate-800 border border-slate-700 rounded-lg p-4 mb-4 text-white"
-        rows={4}
-      />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-      <button
-        onClick={handleGenerate}
-        disabled={loading}
-        className="bg-indigo-500 hover:bg-indigo-600 px-6 py-2 rounded-lg"
-      >
-        {loading ? "Generating..." : "Generate Message"}
-      </button>
+        {/* LEFT — MESSAGE PREVIEW / EDIT */}
+        <div className="bg-slate-900 border border-slate-800 rounded-xl md:p-6 p-3 space-y-2">
 
-      {generatedData && (
-        <div className="mt-8 bg-slate-800 p-6 rounded-lg border border-slate-700">
-          <h2 className="text-xl font-semibold mb-2 text-indigo-400">
-            {generatedData.headline}
+          <h2 className="text-lg font-semibold text-slate-300">
+            Message Preview
           </h2>
 
-          <p className="mb-4">{generatedData.message}</p>
+          {generatedData ? (
+            <>
+              {/* Headline */}
+              <div>
+                <label className="text-xs text-slate-500 mb-2 block">
+                  Headline
+                </label>
+                <input
+                  value={generatedData.headline}
+                  onChange={(e) =>
+                    setGeneratedData({
+                      ...generatedData,
+                      headline: e.target.value,
+                    })
+                  }
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:outline-none"
+                />
+              </div>
 
-          <p className="text-sm text-slate-400 mb-4">
-            CTA: {generatedData.cta}
-          </p>
+              {/* Body */}
+              <div>
+                <label className="text-xs text-slate-500 mb-1 block">
+                  Message
+                </label>
+                <textarea
+                  value={generatedData.message}
+                  onChange={(e) =>
+                    setGeneratedData({
+                      ...generatedData,
+                      message: e.target.value,
+                    })
+                  }
+                  rows={6}
+                  className="w-full max-h-30 bg-slate-800 border border-slate-700 rounded-lg p-3 text-white scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-800 focus:outline-none"
+                />
+              </div>
 
-          <input
-            type="text"
-            placeholder="+91XXXXXXXXXX"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 text-white mb-4"
+              {/* CTA */}
+              <div>
+                <label className="text-xs text-slate-500 mb-1 block">
+                  Call To Action
+                </label>
+                <input
+                  value={generatedData.cta}
+                  onChange={(e) =>
+                    setGeneratedData({
+                      ...generatedData,
+                      cta: e.target.value,
+                    })
+                  }
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:outline-none"
+                />
+              </div>
+
+              {/* Phone */}
+              <div>
+                <label className="text-xs text-slate-500 mb-1 block">
+                  Recipient Phone
+                </label>
+                <input
+                  type="text"
+                  placeholder="+91XXXXXXXXXX"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:outline-none"
+                />
+              </div>
+
+              <button
+                onClick={handleSend}
+                disabled={sending}
+                className="w-full bg-indigo-500 hover:bg-indigo-600 transition px-6 py-3 rounded-lg font-medium"
+              >
+                {sending ? "Sending..." : "Send via WhatsApp"}
+              </button>
+            </>
+          ) : (
+            <div className="text-slate-500 text-sm">
+              Generate a message to preview it here.
+            </div>
+          )}
+        </div>
+
+        {/* RIGHT — AI PROMPTING */}
+        <div className="bg-slate-900 h-min border border-slate-800 rounded-xl md:p-6 p-3 space-y-6">
+
+          <h2 className="text-lg font-semibold text-slate-300">
+            AI Prompt
+          </h2>
+
+          <textarea
+            value={context}
+            onChange={(e) => setContext(e.target.value)}
+            placeholder="Describe your offer, audience, tone..."
+            rows={6}
+            className="w-full bg-slate-800 border border-slate-700 rounded-lg p-4 text-white focus:outline-none max-h-60 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-800"
           />
 
           <button
-            onClick={handleSend}
-            disabled={sending}
-            className="bg-indigo-500 hover:bg-indigo-600 px-6 py-2 rounded-lg"
+            onClick={handleGenerate}
+            disabled={loading}
+            className="w-full bg-indigo-500 hover:bg-indigo-600 transition px-6 py-3 rounded-lg font-medium"
           >
-            {sending ? "Sending..." : "Send via WhatsApp"}
+            {loading ? (
+              <span className="flex items-center justify-center">
+                <Loader2 className="animate-spin size-4 mr-2" />
+                Generating...
+              </span>
+            ) : (
+              "Generate Message"
+            )}
           </button>
         </div>
-      )}
 
-      {status && (
-        <div className="mt-4 text-sm text-slate-300">
-          {status}
-        </div>
-      )}
+      </div>
     </div>
   );
 }

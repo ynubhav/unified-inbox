@@ -19,7 +19,7 @@ export default async function DashboardLayout({
     <DashboardProvider>
       <div className="flex min-h-screen bg-slate-950 text-white">
         <Sidebar user={session.user?.name || "User"} />
-        <main className="flex-1 p-10">{children}</main>
+        <main className="flex-1 p-4 md:p-10 ml-16 md:ml-20">{children}</main>
       </div>
     </DashboardProvider>
   );
