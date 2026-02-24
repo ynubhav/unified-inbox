@@ -1,17 +1,13 @@
 "use client";
 
+import { useDashboard } from "@/context/dashboard-context";
 import { useEffect, useState } from "react";
 
 export default function DashboardPage() {
-  const [data, setData] = useState<any>(null);
+  const { analytics, loading } = useDashboard();
 
-  useEffect(() => {
-    fetch("/api/analytics")
-      .then(res => res.json())
-      .then(setData);
-  }, []);
 
-  if (!data) return <div>Loading analytics...</div>;
+  if (!analytics) return <div>Loading analytics...</div>;
 
   return (
     <div className="max-w-6xl space-y-8">
@@ -21,10 +17,10 @@ export default function DashboardPage() {
       {/* Stat Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
 
-        <Card title="Total Messages" value={data.total} />
-        <Card title="WhatsApp" value={data.whatsapp} />
-        <Card title="SMS" value={data.sms} />
-        <Card title="Success Rate" value={`${data.successRate}%`} />
+        <Card title="Total Messages" value={analytics.total} />
+        <Card title="WhatsApp" value={analytics.whatsapp} />
+        <Card title="SMS" value={analytics.sms} />
+        <Card title="Success Rate" value={`${analytics.successRate}%`} />
 
       </div>
 
@@ -33,7 +29,7 @@ export default function DashboardPage() {
         <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
 
         <div className="space-y-4">
-          {data.recent.map((msg: any) => (
+          {analytics.recent.map((msg: any) => (
             <div
               key={msg.id}
               className="bg-slate-800 border border-slate-700 p-4 rounded-lg"

@@ -1,15 +1,13 @@
 "use client";
 
+import { useDashboard } from "@/context/dashboard-context";
 import { useEffect, useState } from "react";
 
 export default function HistoryPage() {
-  const [messages, setMessages] = useState([]);
+  const { messages, loading } = useDashboard();
 
-  useEffect(() => {
-    fetch("/api/messages")
-      .then(res => res.json())
-      .then(data => setMessages(data.data || []));
-  }, []);
+  if (loading) return <div>Loading history...</div>;
+  if (!messages) return <div>No messages found.</div>;
 
   return (
     <div className="max-w-4xl">
