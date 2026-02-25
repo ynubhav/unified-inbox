@@ -4,7 +4,7 @@ AI-powered multi-channel messaging platform built with **Next.js, Prisma, Neon, 
 
 This project allows users to generate AI-assisted marketing messages and send them via **WhatsApp** or **SMS**, with full message history tracking and analytics.
 
-## 🔗 Live Demo: https://unified-inbox-iota.vercel.app
+## Live Demo: https://unified-inbox-iota.vercel.app
 
 ## Features
 
@@ -115,13 +115,14 @@ context/
 
 ---
 
-## ⚙️ Environment Variables
+## Environment Variables
 
 Create a `.env` file.
 
 ### Database (Neon)
 
-DATABASE_URL="your_neon_connection_string"
+DATABASE_URL="your_neon_pool_connection_string"
+DIRECT_URL="your_neon_direct_connection_string"
 
 ---
 
@@ -153,21 +154,21 @@ TWILIO_WHATSAPP_NUMBER="whatsapp:+14155238886"
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
-### 1️⃣ Install dependencies
+### 1️. Install dependencies
 
 npm install
 
 ---
 
-### 2️⃣ Run Prisma migration
+### 2️. Run Prisma migration
 
 npx prisma migrate dev
 
 ---
 
-### 3️⃣ Start development server
+### 3️. Start development server
 
 npm run dev
 
@@ -177,7 +178,7 @@ http://localhost:3000
 
 ---
 
-## 📦 Deployment
+## Deployment
 
 This project is deployable on **Vercel**.
 
