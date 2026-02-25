@@ -41,3 +41,11 @@ select {
   -moz-appearance: none;
   background-image: none;
 }
+
+.stat-animate {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.stat-animate:hover {
+  transform: translateY(-4px);
+}

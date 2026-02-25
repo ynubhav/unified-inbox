@@ -1,3 +1,4 @@
+import { Mail, MessageCircleCheckIcon } from "lucide-react";
 import Container from "../Container";
 
 export default function Features() {
@@ -15,7 +16,7 @@ export default function Features() {
 
         <div className="grid md:grid-cols-2 gap-8">
           <div className="p-8 bg-slate-800 border border-slate-700 rounded-xl hover:border-indigo-500 transition">
-            <h4 className="text-xl font-semibold">WhatsApp Marketing</h4>
+            <h4 className="text-xl font-semibold flex items-center"><MessageCircleCheckIcon className="mr-2 w-5 h-5"/>WhatsApp Marketing </h4>
             <p className="mt-4 text-slate-400">
               Send AI-generated promotional messages directly to WhatsApp users
               using Twilio sandbox integration.
@@ -23,7 +24,7 @@ export default function Features() {
           </div>
 
           <div className="p-8 bg-slate-800 border border-slate-700 rounded-xl hover:border-indigo-500 transition">
-            <h4 className="text-xl font-semibold">SMS Campaigns</h4>
+            <h4 className="text-xl font-semibold flex items-center"><Mail className="mr-2 w-5 h-5"/>SMS Campaigns </h4>
             <p className="mt-4 text-slate-400">
               Instantly create and deliver SMS marketing messages with
               reliable API-based delivery.

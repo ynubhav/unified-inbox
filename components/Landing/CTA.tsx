@@ -10,7 +10,7 @@ export default function CTA() {
           </h3>
 
           <a
-            href="/api/auth/signin"
+            href="/dashboard"
             className="mt-8 inline-block bg-indigo-500 hover:bg-indigo-600 transition-colors px-6 py-3 rounded-lg font-medium"
           >
             Launch Dashboard

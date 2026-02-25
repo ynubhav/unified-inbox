@@ -19,7 +19,7 @@ export default function Navbar() {
           {isLoggedIn ? (
             <span className="flex gap-4">
               <a href="/dashboard">
-                <button className="ml-4 bg-blue-600 hover:bg-blue-700 transition px-2 md:px-5 py-2 rounded-lg text-sm">
+                <button className="ml-4 bg-indigo-500 hover:bg-indigo-600 transition px-2 md:px-5 py-2 rounded-lg text-sm hover:cursor-pointer">
                   Dashboard
                 </button>
               </a>
@@ -30,7 +30,7 @@ export default function Navbar() {
                     cancel: { label: "Cancel", onClick: () => toast.dismiss() },
                   });
                 }}
-                className="border border-slate-700 hover:bg-slate-800 transition px-2 md:px-5 py-2 rounded-lg text-sm"
+                className="border border-slate-700 hover:bg-slate-800 transition px-2 md:px-5 py-2 rounded-lg text-sm hover:cursor-pointer"
               >
                 Logout
               </button>

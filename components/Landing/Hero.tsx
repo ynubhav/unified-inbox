@@ -20,17 +20,17 @@ export default function Hero() {
 
           <div className="mt-10 flex justify-center gap-4">
             <a
-              href="/api/auth/signin"
+              href="/signin"
               className="bg-indigo-500 hover:bg-indigo-600 transition-colors px-6 py-3 rounded-lg font-medium"
             >
               Get Started
             </a>
 
             <a
-              href="#features"
+              href="#how-it-works"
               className="border border-slate-700 hover:bg-slate-800 transition px-6 py-3 rounded-lg"
             >
-              Learn More
+              How It Works
             </a>
           </div>
         </div>

@@ -3,6 +3,8 @@ import Hero from "@/components//Landing/Hero";
 import Features from "@/components/Landing/Features";
 import CTA from "@/components/Landing/CTA";
 import Footer from "@/components/Footer";
+import { Howitworks } from "@/components/Landing/Howitworks";
+import { Stats } from "@/components/Landing/Stats";
 
 export default function Home() {
   return (
@@ -10,6 +12,8 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Features />
+      <Howitworks/>
+      <Stats />
       <CTA />
       <Footer />
     </main>
