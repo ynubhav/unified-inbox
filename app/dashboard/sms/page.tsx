@@ -2,6 +2,7 @@
 
 import { MessageGeneratingSkeleton } from "@/components/skeletons/generating.skeleton";
 import { Loader2 } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -94,7 +95,7 @@ export default function WhatsAppPage() {
 
   return (
     <div className="max-w-7xl ">
-      <h1 className="text-3xl font-bold mb-8">SMS Inbox</h1>
+      <h1 className="text-3xl font-bold mb-8 flex items-center gap-2"><Image src="/sms.svg" width={28} height={28} alt="Sms Icon"/>SMS Inbox</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* LEFT — MESSAGE PREVIEW / EDIT */}
