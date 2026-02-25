@@ -1,5 +1,6 @@
 "use client";
 
+import { MessageGeneratingSkeleton } from "@/components/skeletons/generating.skeleton";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -102,7 +103,9 @@ export default function WhatsAppPage() {
             Message Preview
           </h2>
 
-          {generatedData ? (
+          {loading ? (
+            <MessageGeneratingSkeleton />
+          ) : generatedData ? (
             <>
               {/* Headline */}
               <div>
@@ -194,7 +197,7 @@ export default function WhatsAppPage() {
             onChange={(e) => setContext(e.target.value)}
             placeholder="Describe your offer, audience, tone..."
             rows={6}
-            className="w-full bg-slate-800 border border-slate-700 rounded-lg p-4 text-white focus:outline-none max-h-60 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-800"
+            className="w-full bg-slate-800 border border-slate-700 rounded-lg p-4 text-white focus:outline-none max-h-20 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-800"
           />
 
           <button
